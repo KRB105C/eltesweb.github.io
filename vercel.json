@@ -7,5 +7,10 @@
   "routes": [
     { "src": "/api/download", "dest": "/api/download.js" },
     { "src": "/", "dest": "/public/index.html" }
-  ]
+  ],
+  "build": {
+    "env": {
+      "NODE_VERSION": "20.x"
+    }
+  }
 }
