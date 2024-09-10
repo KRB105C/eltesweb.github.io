@@ -1,5 +1,8 @@
+
 import { NextResponse } from 'next/server';
 import axios from 'axios';
+
+export default async function handler(req, res) {
 
 export async function GET(request) {
   const url = new URL(request.url).searchParams.get('url');
