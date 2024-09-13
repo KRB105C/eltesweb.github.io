@@ -1,16 +1,19 @@
 {
   "version": 2,
   "builds": [
-    { "src": "public/index.html", "use": "@vercel/static" },
-    { "src": "api/*.js", "use": "@vercel/node" }
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    }
   ],
   "routes": [
-    { "src": "/api/download", "dest": "/api/download.js" },
-    { "src": "/", "dest": "/public/index.html" }
-  ],
-  "build": {
-    "env": {
-      "NODE_VERSION": "20.x"
+    {
+      "src": "/",
+      "dest": "/public/index.html"
+    },
+    {
+      "src": "/download/(.*)",
+      "dest": "/index.js"
     }
-  }
+  ]
 }
