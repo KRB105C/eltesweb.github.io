@@ -1,8 +1,12 @@
-const express = require('express');
-const ytdl = require('ytdl-core');
-const TikTokScraper = require('tiktok-scraper');
-const Instagram = require('instagram-scraper-api');
-const path = require('path');
+import express from 'express';
+import ytdl from 'ytdl-core';
+import TikTokScraper from 'tiktok-scraper';
+import Instagram from 'instagram-scraper-api';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 3000;
