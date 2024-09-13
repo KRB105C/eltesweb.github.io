@@ -1,21 +1,23 @@
-import http from 'http';
+import { NextResponse } from 'next/server';
 import axios from 'axios';
 
-export async function GET(req, res) {
-  const url = new URL(req.url, `http://${req.headers.host}`).searchParams.get('url');
+export async function GET(request) {
+  // Ambil parameter URL dari query string
+  const url = new URL(request.url).searchParams.get('url');
   
+  // Jika tidak ada parameter URL, kembalikan error 400
   if (!url) {
-    res.writeHead(400, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ error: 'URL is required' }));
-    return;
+    return NextResponse.json({ error: 'URL is required' }, { status: 400 });
   }
 
   try {
+    // Ambil data dari URL Instagram menggunakan axios
     const response = await axios.get(url);
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(response.data));
+    
+    // Kembalikan respons dengan data yang diambil
+    return NextResponse.json(response.data);
   } catch (error) {
-    res.writeHead(500, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ error: 'Error occurred while fetching data' }));
+    // Kembalikan error 500 jika terjadi kesalahan saat mengambil data
+    return NextResponse.json({ error: 'Error occurred while fetching data' }, { status: 500 });
   }
 }
