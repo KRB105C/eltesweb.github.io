@@ -1,19 +1,16 @@
+// vercel.json
 {
   "version": 2,
   "builds": [
     {
-      "src": "index.js",
+      "src": "api/send-address.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/",
-      "dest": "/public/index.html"
-    },
-    {
-      "src": "/download/(.*)",
-      "dest": "/index.js"
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     }
   ]
 }
