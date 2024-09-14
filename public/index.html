@@ -3,82 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Downloader</title>
+    <title>Send Address to Email</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
             margin: 0;
-        }
-        .container {
-            width: 90%;
-            max-width: 500px;
-            background: #fff;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1 {
+        form {
             margin-bottom: 20px;
         }
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-        input[type="text"] {
-            width: calc(100% - 20px);
-            padding: 10px;
+        #log {
             border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            background-color: #28a745;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        .error {
-            color: #d9534f;
+            padding: 10px;
+            background-color: #f9f9f9;
+            max-height: 200px;
+            overflow-y: auto;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Video Downloader</h1>
-        <label for="url">Video URL:</label>
-        <input type="text" id="url" placeholder="Enter video URL here">
-        <div>
-            <button onclick="download('youtube')">Download from YouTube</button>
-            <button onclick="download('tiktok')">Download from TikTok</button>
-            <button onclick="download('instagram')">Download from Instagram</button>
-        </div>
-        <p id="error" class="error"></p>
-    </div>
+    <h1>Submit Your Address</h1>
+    <form id="addressForm">
+        <label for="address">Enter your address:</label>
+        <input type="text" id="address" name="address" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="responseMessage"></p>
+    <div id="log"></div>
 
     <script>
-        function download(platform) {
-            const url = document.getElementById('url').value;
-            if (!url) {
-                document.getElementById('error').textContent = 'Please enter a URL.';
-                return;
+        const form = document.getElementById('addressForm');
+        const responseMessage = document.getElementById('responseMessage');
+        const log = document.getElementById('log');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const address = document.getElementById('address').value;
+
+            try {
+                const response = await fetch('/api/send-address', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ address }),
+                });
+
+                const result = await response.json();
+                responseMessage.textContent = result.message;
+                logMessage(`Success: ${result.message}`);
+            } catch (error) {
+                responseMessage.textContent = 'Error sending address';
+                console.error('Error:', error);
+                logMessage(`Error: ${error.message}`);
             }
+        });
 
-            document.getElementById('error').textContent = '';
-
-            const downloadUrl = `https://your-vercel-url/download/${platform}?url=${encodeURIComponent(url)}`;
-            window.location.href = downloadUrl;
+        function logMessage(message) {
+            const now = new Date().toLocaleTimeString();
+            log.innerHTML += `<p>[${now}] ${message}</p>`;
+            log.scrollTop = log.scrollHeight; // Auto-scroll to the latest log
         }
     </script>
 </body>
