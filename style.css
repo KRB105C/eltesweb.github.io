@@ -1,0 +1,248 @@
+body {
+            font-family: Arial, sans-serif;
+            background-color: #030303;
+            color: #333;
+            margin: 0;
+            padding: 0;
+              height: 100%; /* Menjamin elemen berada dalam tampilan */
+           }
+           
+           .spinner {
+  border: 17px solid #00000000;
+  border-radius: 50%;
+  border-top: 17px solid #02d0db;
+  width: 80px;
+  height: 80px;
+  animation: spin 0.5s linear infinite;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+           
+           
+       #background-container {
+    position: fixed; /* Menempel pada viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Menutupi seluruh lebar viewport */
+    height: 100vh; /* Menutupi seluruh tinggi viewport */
+    overflow: hidden; /* Mencegah blob keluar dari area ini */
+    z-index: -1; /* Menempatkan blob di belakang konten utama */
+}
+
+
+#blob-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Mencegah blob keluar dari area ini */
+}
+
+           
+           .blob {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: rgb(255, 0, 0);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: move 15s infinite alternate ease-in-out, changeColor 10s infinite alternate ease-in-out;
+    z-index: -1;
+    overflow: hidden;
+}
+
+@keyframes move {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(80vw, 80vh); }
+}
+
+@keyframes changeColor {
+    0% { background: rgb(255, 0, 0); }
+    33% { background: rgb(0, 255, 0); }
+    66% { background: rgb(0, 0, 255); }
+    100% { background: rgb(255, 0, 0); }
+}
+           
+        h1 {
+            text-align: center;
+            margin: 20px;
+            color: #333;
+        }
+#search-container {
+    text-align: center;
+    margin: 20px;
+    
+    
+}
+
+#search-input::placeholder {
+    color: #f0faff; /* Warna placeholder */
+    font-style: italic; /* Gaya font miring untuk placeholder */
+    opacity: 1; /* Pastikan opacity penuh untuk placeholder */
+}
+
+#search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 60%;
+    max-width: 400px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #000000; /* Ubah latar belakang di sini */
+}
+
+#search-input:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+#search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    
+}
+
+#search-form input[type="text"] {
+  
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #00e2ff;
+    border-radius: 4px;
+    width: 60%;
+    max-width: 400px; /* Batasi lebar maksimum input */
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#search-form input[type="text"]:focus {
+    border-color: #000000;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+     background-color: #00e2ff;
+    outline: 2px solid #000000;;
+}
+        #filter-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        #filter-button {
+            background-color: #000000;
+            color: #f0faff;
+            border: 2px solid #03f2ff;
+            border-radius: 4px;
+            padding: 11px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 20px; /* Menggeser ke kanan */
+    margin-top: -9px;  /* Menggeser ke bawah */
+        }
+        #filter-button:hover {
+            background-color: #03ffe66b;
+        }
+        #filter-button svg {
+            width: 20px;
+            height: 20px;
+            fill: #f0faff;
+        }
+        #filter-container select {
+            display: none; /* Hidden by default, shown when filter button is clicked */
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-left: 10px;
+            margin-top: -9px;
+        }
+        #file-list {
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: #ffffff00;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        #category-filter {
+    width: 200px; /* Lebar dropdown */
+    padding: 10px; /* Jarak dalam */
+    font-size: 16px; /* Ukuran font */
+    background-color: #00000000; /* Warna latar belakang */
+    color: #f0faff; /* Warna teks */
+    border: 99px solid #03f2ff; /* Garis tepi dropdown */
+    border-width: 1px !important;
+    border-radius: 999px; /* Membuat sudut-sudutnya melengkung */
+    appearance: none; /* Menghilangkan panah default di dropdown (untuk browser modern) */
+    cursor: pointer; /* Menjadikan kursor pointer saat di hover */
+    outline: none; /* Menghilangkan outline bawaan browser saat elemen aktif */
+    text-align: center; /* Mengatur teks ke tengah secara horizontal */
+    line-height: 1.5; /* Mengatur jarak antar-baris, membantu menempatkan teks secara vertikal */
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Transisi halus saat hover */
+    
+}
+
+/* Gaya saat di hover */
+#category-filter:hover {
+  
+    background-color: #00000000; /* Warna latar saat di hover */
+    border-color: #ff03f7; /* Warna garis tepi saat di hover */
+}
+
+/* Gaya saat elemen aktif */
+#category-filter:focus {
+  border-width: 1px; /* Ketebalan border */
+    border-color: #03ff68; /* Warna garis tepi saat elemen dipilih */
+    box-shadow: 0 0 5px rgba(247, 3, 255, 0.5); /* Efek bayangan */
+}
+        
+        .file-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #000;
+            border: 2px solid #fff; /* Garis pinggir putih */
+            width: 375px; /* Lebar kotak persegi */
+            border-radius: 8px;
+            height: 375px; /* Tinggi kotak persegi */
+            box-sizing: border-box;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            text-decoration: none; /* Menghilangkan garis bawah */
+        }
+        .file-item a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .file-item p {
+            color: #ccc;
+            font-size: 14px;
+            margin-top: 10px;
+            height: 60px; /* Batasi tinggi deskripsi */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-decoration: none; /* Menghilangkan garis bawah */
+        }
