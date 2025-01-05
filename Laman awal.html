@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar File HTML GitHub</title>
+    <!-- Menyertakan file CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  
+
+    <h1>Daftar File HTML GitHub</h1>
+
+    <div id="search-container">
+        <div id="search-form">
+            <input type="text" id="search-input" placeholder="Cari folder..." onkeyup="searchFiles()">
+            <div id="filter-container">
+                <button id="filter-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 17H8v-2h8v2zM20 12H4v-2h16v2zM18 7H6V5h12v2z"/></svg>
+                    Filter
+                </button>
+                <select id="category-filter" onchange="filterByCategory()">
+                    <option value="">Semua Rating</option>
+                </select>
+            </div>
+         </div>
+          
+    </div>
+
+    <div id="file-list">
+        <!-- Daftar folder dengan file index.html dan deskripsi akan ditampilkan di sini -->
+        </div>
+            
+        <div id="background-container">
+        <div id="blob-wrapper">
+          </div>
+          
+          <div id="loading-spinner" style="display: none;">
+  <!-- Animasi Loading atau Text -->
+  <div class="spinner"></div>
+</div>
+          
+    </div>
+
+    <!-- Menyertakan file JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
